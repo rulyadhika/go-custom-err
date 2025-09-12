@@ -2,7 +2,7 @@ package errs
 
 import "net/http"
 
-type CustomError interface {
+type Error interface {
 	StatusCode() int
 	Status() string
 	Message() string
@@ -27,7 +27,7 @@ func (c *generalError) Message() string {
 	return c.ErrMessage
 }
 
-func NewInternalServerError(msg string) CustomError {
+func NewInternalServerError(msg string) Error {
 	return &generalError{
 		ErrStatusCode: http.StatusInternalServerError,
 		ErrStatus:     http.StatusText(http.StatusInternalServerError),
@@ -36,7 +36,7 @@ func NewInternalServerError(msg string) CustomError {
 	}
 }
 
-func NewNotFoundError(msg string) CustomError {
+func NewNotFoundError(msg string) Error {
 	return &generalError{
 		ErrStatusCode: http.StatusNotFound,
 		ErrStatus:     http.StatusText(http.StatusNotFound),
@@ -45,7 +45,7 @@ func NewNotFoundError(msg string) CustomError {
 	}
 }
 
-func NewBadRequestError(msg string) CustomError {
+func NewBadRequestError(msg string) Error {
 	return &generalError{
 		ErrStatusCode: http.StatusBadRequest,
 		ErrStatus:     http.StatusText(http.StatusBadRequest),
@@ -54,7 +54,7 @@ func NewBadRequestError(msg string) CustomError {
 	}
 }
 
-func NewConflictError(msg string) CustomError {
+func NewConflictError(msg string) Error {
 	return &generalError{
 		ErrStatusCode: http.StatusConflict,
 		ErrStatus:     http.StatusText(http.StatusConflict),
@@ -63,7 +63,7 @@ func NewConflictError(msg string) CustomError {
 	}
 }
 
-func NewUnprocessableEntityError(msg string) CustomError {
+func NewUnprocessableEntityError(msg string) Error {
 	return &generalError{
 		ErrStatusCode: http.StatusUnprocessableEntity,
 		ErrStatus:     http.StatusText(http.StatusUnprocessableEntity),
@@ -72,7 +72,7 @@ func NewUnprocessableEntityError(msg string) CustomError {
 	}
 }
 
-func NewUnauthorizedError(msg string) CustomError {
+func NewUnauthorizedError(msg string) Error {
 	return &generalError{
 		ErrStatusCode: http.StatusUnauthorized,
 		ErrStatus:     http.StatusText(http.StatusUnauthorized),
@@ -81,7 +81,7 @@ func NewUnauthorizedError(msg string) CustomError {
 	}
 }
 
-func NewForbiddenError(msg string) CustomError {
+func NewForbiddenError(msg string) Error {
 	return &generalError{
 		ErrStatusCode: http.StatusForbidden,
 		ErrStatus:     http.StatusText(http.StatusForbidden),
